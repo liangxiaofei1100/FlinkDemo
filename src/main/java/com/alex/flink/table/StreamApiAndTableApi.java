@@ -18,6 +18,7 @@ public class StreamApiAndTableApi {
 
         //从文件读取
         DataStream<String> inputStream = environment.readTextFile("data/sensor.txt");
+        // 转换为对象
         DataStream<SensorReading> dataStream = inputStream.map(line -> {
             String[] split = line.split(",");
             return new SensorReading(split[0], Long.valueOf(split[1]), Double.valueOf(split[2]));
