@@ -19,7 +19,7 @@ import scala.Tuple3;
 public class KeyedStateDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
-//        environment.setParallelism(1);
+        environment.setParallelism(1);
         DataStream<SensorReading> dataStream = SensorReadingStream.getDemoStream(environment);
 
         SingleOutputStreamOperator<Tuple3<String, Double, Double>> tempChangeStream = dataStream.keyBy(SensorReading::getId).flatMap(new TempChangeWarning(2d));
@@ -28,7 +28,7 @@ public class KeyedStateDemo {
         environment.execute();
     }
 
-
+    // 温度变化报警
     private static class TempChangeWarning extends RichFlatMapFunction<SensorReading, Tuple3<String, Double, Double>> {
         // 温度跳变阈值
         private final double threshold;

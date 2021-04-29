@@ -2,11 +2,11 @@ package com.alex.flink.table;
 
 import com.alex.flink.beans.DataRoom;
 import org.apache.commons.io.FileUtils;
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableResult;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
-import org.apache.flink.types.Row;
 
 import java.io.File;
 
@@ -24,7 +24,9 @@ public class MysqlApi2 {
         tableResult.print();
 
         Table table = tableEnvironment.sqlQuery("select * from data_room");
-        tableEnvironment.toAppendStream(table, DataRoom.class).print("result");
+        // 将结果转换为java对象
+        DataStream<DataRoom> dataStream = tableEnvironment.toAppendStream(table, DataRoom.class);
+        dataStream.print();
         environment.execute();
     }
 }
