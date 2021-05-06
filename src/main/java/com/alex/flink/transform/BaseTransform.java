@@ -6,13 +6,19 @@ import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.util.Collector;
+import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author liangxiaofei
  * @date 2021/3/11 11:09
  */
 public class BaseTransform {
+    private static Logger logger = LoggerFactory.getLogger(BaseTransform.class);
+
     public static void main(String[] args) throws Exception {
+        logger.info("Show log");
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
 //        environment.setParallelism(1);
 
