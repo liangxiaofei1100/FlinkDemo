@@ -1,12 +1,11 @@
 package com.alex.flink.table;
 
-import com.alex.flink.beans.DataRoom;
+import com.alex.flink.beans.DataRoomV2;
 import org.apache.commons.io.FileUtils;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.TableResult;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 
 import java.io.File;
@@ -51,7 +50,7 @@ public class JoinApi {
                 "left join base_community d " +
                 "on c.community_id = d.id ");
         // 将结果转换为java对象
-        DataStream<Tuple2<Boolean, DataRoom>> dataStream = tableEnvironment.toRetractStream(table, DataRoom.class);
+        DataStream<Tuple2<Boolean, DataRoomV2>> dataStream = tableEnvironment.toRetractStream(table, DataRoomV2.class);
         dataStream.print();
 
         environment.execute();

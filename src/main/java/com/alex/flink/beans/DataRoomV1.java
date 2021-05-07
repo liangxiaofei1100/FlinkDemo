@@ -6,7 +6,7 @@ import java.sql.Timestamp;
  * @author liangxiaofei
  * @date 2021/4/28 14:15
  */
-public class DataRoom {
+public class DataRoomV1 {
     private Integer id;
     private Integer collector_id;
     private String collector_number;
@@ -14,9 +14,6 @@ public class DataRoom {
     private Timestamp data_time;
     private Float temperature;
     private Float humidity;
-    private Integer building_id;
-    private Integer community_id;
-    private Integer station_id;
 
     public Integer getId() {
         return id;
@@ -74,29 +71,6 @@ public class DataRoom {
         this.humidity = humidity;
     }
 
-    public Integer getBuilding_id() {
-        return building_id;
-    }
-
-    public void setBuilding_id(Integer building_id) {
-        this.building_id = building_id;
-    }
-
-    public Integer getCommunity_id() {
-        return community_id;
-    }
-
-    public void setCommunity_id(Integer community_id) {
-        this.community_id = community_id;
-    }
-
-    public Integer getStation_id() {
-        return station_id;
-    }
-
-    public void setStation_id(Integer station_id) {
-        this.station_id = station_id;
-    }
 
     @Override
     public String toString() {
@@ -108,9 +82,6 @@ public class DataRoom {
                 ", data_time=" + data_time +
                 ", temperature=" + temperature +
                 ", humidity=" + humidity +
-                ", building_id=" + building_id +
-                ", community_id=" + community_id +
-                ", station_id=" + station_id +
                 '}';
     }
 }
