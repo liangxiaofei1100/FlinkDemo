@@ -24,7 +24,7 @@ public class RedisSinkDemo {
                     String[] strings = s.split(",");
                     return new SensorReading(strings[0], Long.valueOf(strings[1]), Double.valueOf(strings[2]));
                 });
-        FlinkJedisConfigBase config = new FlinkJedisPoolConfig.Builder().setHost("192.168.0.139").setPort(6379).build();
+        FlinkJedisConfigBase config = new FlinkJedisPoolConfig.Builder().setHost("192.168.18.61").setPort(6379).build();
         dataStream.addSink(new RedisSink<>(config, new RedisMapper<SensorReading>() {
             @Override
             public RedisCommandDescription getCommandDescription() {
