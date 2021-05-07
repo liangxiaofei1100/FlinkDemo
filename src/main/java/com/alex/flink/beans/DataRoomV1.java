@@ -74,7 +74,7 @@ public class DataRoomV1 {
 
     @Override
     public String toString() {
-        return "DataRoom{" +
+        return "DataRoomV1{" +
                 "id=" + id +
                 ", collector_id=" + collector_id +
                 ", collector_number='" + collector_number + '\'' +

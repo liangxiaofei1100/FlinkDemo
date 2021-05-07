@@ -100,7 +100,7 @@ public class DataRoomV2 {
 
     @Override
     public String toString() {
-        return "DataRoom{" +
+        return "DataRoomV2{" +
                 "id=" + id +
                 ", collector_id=" + collector_id +
                 ", collector_number='" + collector_number + '\'' +
