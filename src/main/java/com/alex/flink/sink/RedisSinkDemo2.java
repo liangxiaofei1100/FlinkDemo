@@ -40,7 +40,6 @@ public class RedisSinkDemo2 {
         @Override
         public void invoke(SensorReading value, Context context) throws Exception {
             try (Jedis jedis = jedisPool.getResource()) {
-                jedis.connect();
                 String id = value.getId();
                 int seconds = 1000;
                 jedis.setex("sensor-t:" + id, seconds, String.valueOf(value.getTemperature()));
