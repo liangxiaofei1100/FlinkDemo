@@ -1,6 +1,7 @@
 package com.alex.flink.window;
 
 import com.alex.flink.beans.SensorReading;
+import com.alex.flink.common.SensorReadingStream;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
@@ -23,21 +24,10 @@ public class TimeWindowDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment environment = StreamExecutionEnvironment.getExecutionEnvironment();
         environment.setParallelism(1);
-
-        DataStream<String> dataSource = environment.readTextFile("data/sensor.txt");
-        DataStream<SensorReading> dataStream = dataSource
-                .map((MapFunction<String, SensorReading>) s -> {
-                    String[] strings = s.split(",");
-                    return new SensorReading(strings[0], Long.valueOf(strings[1]), Double.valueOf(strings[2]));
-                });
+        DataStream<SensorReading> dataStream = SensorReadingStream.getDemoStream(environment);
 
         // 开窗测试
-        KeyedStream<SensorReading, String> keyedStream = dataStream.keyBy(new KeySelector<SensorReading, String>() {
-            @Override
-            public String getKey(SensorReading sensorReading) throws Exception {
-                return sensorReading.getId();
-            }
-        });
+        KeyedStream<SensorReading, String> keyedStream = dataStream.keyBy((KeySelector<SensorReading, String>) SensorReading::getId);
 
         // 滚动时间窗口
         // 滑动时间窗口
@@ -70,7 +60,7 @@ public class TimeWindowDemo {
                         return a + b;
                     }
                 });
-        resultStream.print();
+        resultStream.print("TimeWindowDemo");
 
         resultStream = keyedStream
 //                .window(SlidingProcessingTimeWindows.of(Time.minutes(10), Time.minutes(5)));
@@ -82,8 +72,6 @@ public class TimeWindowDemo {
                     }
                 });
         resultStream.print();
-
-
 
         environment.execute();
     }

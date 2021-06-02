@@ -24,7 +24,7 @@ public class MysqlApi2 {
         TableResult tableResult = tableEnvironment.executeSql(sql);
         tableResult.print();
 
-        Table table = tableEnvironment.sqlQuery("select * from data_room");
+        Table table = tableEnvironment.sqlQuery("select * from data_room limit 10");
         // 将结果转换为java对象
         DataStream<DataRoomV1> dataStream = tableEnvironment.toAppendStream(table, DataRoomV1.class);
         dataStream.print();

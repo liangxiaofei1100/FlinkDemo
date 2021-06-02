@@ -8,7 +8,7 @@ CREATE TABLE data_room (
     humidity FLOAT
 ) WITH (
   'connector' = 'jdbc',
-  'url' = 'jdbc:mysql://192.168.18.60:3306/test',
+  'url' = 'jdbc:mysql://192.168.18.88:3306/epoo_cloud_base',
   'driver' = 'com.mysql.cj.jdbc.Driver',
   'username' = 'root',
   'password' = '123456',
